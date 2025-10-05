@@ -44,7 +44,7 @@ Mounting the Share: I mounted the remote share to my local machine to inspect it
 
 Discovery: Inside the share, I found a password-protected file named save.zip. The unzip command revealed it contained two files: id_rsa and todo.txt.
 
-! [Mounting NFS and Finding save.zip](Penetration Test: From Reconnaissance to Root/images/7.png)
+! [Mounting NFS and Finding save.zip](https://github.com/IamNotaThreat/Offensive-Security-Labs/blob/main/Penetration%20Test%3A%20From%20Reconnaissance%20to%20Root/images/7.png)
 
 ### Offline Attack & Credential Discovery
 I moved the save.zip file for an offline password attack.
