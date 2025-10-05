@@ -13,9 +13,7 @@ Tool: netdiscover
 
 Result: A target was identified at [TARGET_IP].
 
-![netdiscover Results] Offensive-Security-Labs/Penetration Test: From Reconnaissance to Root
-/images/1.png
-
+![netdiscover Results](https://github.com/IamNotaThreat/Offensive-Security-Labs/blob/main/Penetration%20Test%3A%20From%20Reconnaissance%20to%20Root/images/1.png)
 ### Service Enumeration
 With the target identified, I ran a comprehensive nmap scan to discover open ports and running services.
 
