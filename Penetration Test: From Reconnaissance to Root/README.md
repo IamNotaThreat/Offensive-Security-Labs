@@ -29,7 +29,7 @@ NFS (Port 2049): A Network File System service was active.
 
 HTTP (Port 36363): Another Apache server, which was later found to host a phpinfo() page, confirming a significant information disclosure vulnerability.
 
-! [Nmap Scan Results] (/images/2.png)
+! [Nmap Scan Results](/images/2.png)
  
 
 ## Phase 2: Vulnerability Analysis & Exploitation 🔓
