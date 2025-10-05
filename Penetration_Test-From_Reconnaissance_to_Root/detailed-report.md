@@ -14,7 +14,7 @@ Tool: netdiscover
 
 Result: A target was identified at [TARGET_IP].
 
-! [netdiscover Results](https://github.com/IamNotaThreat/Offensive-Security-Labs/blob/main/Penetration%20Test%3A%20From%20Reconnaissance%20to%20Root/images/1.png)
+! [netdiscover Results](https://github.com/IamNotaThreat/Offensive-Security-Labs/blob/main/Penetration_Test-From_Reconnaissance_to_Root/images/1.png))
 ### Service Enumeration
 With the target identified, I ran a comprehensive nmap scan to discover open ports and running services.
 
@@ -30,7 +30,7 @@ NFS (Port 2049): A Network File System service was active.
 
 HTTP (Port 36363): Another Apache server, which was later found to host a phpinfo() page, confirming a significant information disclosure vulnerability.
 
-! [Nmap Scan Results](https://github.com/IamNotaThreat/Offensive-Security-Labs/blob/main/Penetration%20Test%3A%20From%20Reconnaissance%20to%20Root/images/2.png)
+! [Nmap Scan Results](https://github.com/IamNotaThreat/Offensive-Security-Labs/blob/main/Penetration_Test-From_Reconnaissance_to_Root/images/2.png)
  
 
 ## Phase 2: Vulnerability Analysis & Exploitation 🔓
@@ -45,7 +45,7 @@ Mounting the Share: I mounted the remote share to my local machine to inspect it
 
 Discovery: Inside the share, I found a password-protected file named save.zip. The unzip command revealed it contained two files: id_rsa and todo.txt.
 
-! [Mounting NFS and Finding save.zip](https://github.com/IamNotaThreat/Offensive-Security-Labs/blob/main/Penetration%20Test%3A%20From%20Reconnaissance%20to%20Root/images/7.png)
+! [Mounting NFS and Finding save.zip](https://github.com/IamNotaThreat/Offensive-Security-Labs/blob/main/Penetration_Test-From_Reconnaissance_to_Root/images/7.png)
 
 ### Offline Attack & Credential Discovery
 I moved the save.zip file for an offline password attack.
@@ -60,7 +60,7 @@ id_rsa: A standard SSH private key.
 
 todo.txt: A note signed with the initials "jp", giving me a clue for a potential username.
 
-! [Cracking the Zip and its Contents](https://github.com/IamNotaThreat/Offensive-Security-Labs/blob/main/Penetration%20Test%3A%20From%20Reconnaissance%20to%20Root/images/8.png)
+! [Cracking the Zip and its Contents](https://github.com/IamNotaThreat/Offensive-Security-Labs/blob/main/Penetration_Test-From_Reconnaissance_to_Root/images/8.png)
 
 ## Phase 3: Pivoting to Web Vulnerabilities 🌐
 While the SSH key was a strong lead, it was passphrase-protected. I pivoted back to the web servers to explore other paths.
@@ -68,8 +68,8 @@ While the SSH key was a strong lead, it was passphrase-protected. I pivoted back
 ### Content Discovery
 I used ffuf to brute-force directories on both web servers. This revealed several key locations, including /app on port 80 and /dev on port 8080.
 
-! [FFUF Scan Results](https://github.com/IamNotaThreat/Offensive-Security-Labs/blob/main/Penetration%20Test%3A%20From%20Reconnaissance%20to%20Root/images/5.png)
-! [FFUF Scan Results](https://github.com/IamNotaThreat/Offensive-Security-Labs/blob/main/Penetration%20Test%3A%20From%20Reconnaissance%20to%20Root/images/6.png)
+! [FFUF Scan Results](https://github.com/IamNotaThreat/Offensive-Security-Labs/blob/main/Penetration_Test-From_Reconnaissance_to_Root/images/5.png)
+! [FFUF Scan Results](https://github.com/IamNotaThreat/Offensive-Security-Labs/blob/main/Penetration_Test-From_Reconnaissance_to_Root/images/6.png)
 
 ### Exploiting Information Disclosure
 Directory Listing (Port 80): Navigating to [TARGET_IP]/app/ revealed that directory listing was enabled. I explored the directories and found plaintext database credentials in /app/config/config.yml:
@@ -80,7 +80,7 @@ Password: i_love_java
 
 LFI Exploit (Port 8080): I identified the application on port 8080 as BoltWire. Using searchsploit, I found a public Local File Inclusion (LFI) exploit. I used a directory traversal payload (.../../etc/passwd) to read the /etc/passwd file, which confirmed the existence of the user jeanpaul. This correlated perfectly with the "jp" signature found earlier.
 
-! [LFI Exploit Showing /etc/passwd](https://github.com/IamNotaThreat/Offensive-Security-Labs/blob/main/Penetration%20Test%3A%20From%20Reconnaissance%20to%20Root/images/16.png)
+! [LFI Exploit Showing /etc/passwd](https://github.com/IamNotaThreat/Offensive-Security-Labs/blob/main/Penetration_Test-From_Reconnaissance_to_Root/images/16.png)
 
 ## Phase 4: Initial Access & Privilege Escalation 🚀
 With all the pieces gathered, it was time to gain access and escalate.
@@ -88,7 +88,7 @@ With all the pieces gathered, it was time to gain access and escalate.
 ### Gaining a Foothold (Initial Access)
 I leveraged the principle of password reuse. I combined the username jeanpaul (confirmed via LFI) with the password i_love_java (found in the config.yml file) and successfully logged in via SSH.
 
-! [Successful SSH Login](https://github.com/IamNotaThreat/Offensive-Security-Labs/blob/main/Penetration%20Test%3A%20From%20Reconnaissance%20to%20Root/images/18.png)
+! [Successful SSH Login](https://github.com/IamNotaThreat/Offensive-Security-Labs/blob/main/Penetration_Test-From_Reconnaissance_to_Root/images/18.png)
 
 ### Privilege Escalation to Root
 Immediately after logging in, I checked my sudo privileges.
@@ -99,7 +99,7 @@ Exploitation: I referenced GTFOBins for known methods to escalate privileges wit
 
 System Compromise: I confirmed my identity as root with the whoami command and captured the final flag from the /root directory.
 
-! [Final Root Shell and Flag](https://github.com/IamNotaThreat/Offensive-Security-Labs/blob/main/Penetration%20Test%3A%20From%20Reconnaissance%20to%20Root/images/20.png)
+! [Final Root Shell and Flag](https://github.com/IamNotaThreat/Offensive-Security-Labs/blob/main/Penetration_Test-From_Reconnaissance_to_Root/images/20.png)
 
 ## Conclusion & Key Takeaways
 This engagement successfully demonstrated how multiple, seemingly separate vulnerabilities can be chained together to achieve full system compromise. The key takeaways include:
