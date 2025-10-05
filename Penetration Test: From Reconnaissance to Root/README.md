@@ -13,7 +13,8 @@ Tool: netdiscover
 
 Result: A target was identified at [TARGET_IP].
 
-[Your Screenshot of netdiscover Output Here]
+![netdiscover Results] Offensive-Security-Labs/Penetration Test: From Reconnaissance to Root
+/images/1.png
 
 ### Service Enumeration
 With the target identified, I ran a comprehensive nmap scan to discover open ports and running services.
@@ -30,7 +31,8 @@ NFS (Port 2049): A Network File System service was active.
 
 HTTP (Port 36363): Another Apache server, which was later found to host a phpinfo() page, confirming a significant information disclosure vulnerability.
 
-[Your Screenshot of Nmap Scan Results Here]
+! [Nmap Scan Results] (/images/2.png)
+ 
 
 ## Phase 2: Vulnerability Analysis & Exploitation 🔓
 This phase involved investigating the services discovered by nmap.
