@@ -1,4 +1,5 @@
 Project Overview
+
 This report documents the full process of a penetration test performed on a target machine in a controlled lab environment. The objective was to gain initial access, escalate privileges to root, and capture the final flag. This exercise demonstrates a realistic attack chain, combining multiple vulnerabilities to achieve a full system compromise.
 
 Disclaimer: All activities were conducted in an isolated, virtual lab environment on a machine designed to be vulnerable for educational purposes.
